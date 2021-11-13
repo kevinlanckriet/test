@@ -3,7 +3,7 @@ const app = express()
 const port = 3000
 //accolades voor enkel 1 funcie te importeren
 const {
-    createTable
+    createTable, getData, idValidation, getPost
 } = require('./helpers/dbhelper.js')
 
 
@@ -23,10 +23,23 @@ app.get('/', (req, res) => {
 })
 
 app.get('/table', (req, res) => {
-    res.send('Hello World!')
+    getData(pg).then(data => {
+        res.json(data)
+    })  
+})
+app.get('/table/:id', idValidation, (req, res) => {
+    getPost(pg, req.params.id).then(post => {
+        res.json(post)
+    })
+})
+
+app.put('/:id', (req, res) => {
+
 })
 app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
+    /*console.log(`Example app listening at http://localhost:${port}`)*/
 })
 
 createTable(pg);
+
+module.exports = app

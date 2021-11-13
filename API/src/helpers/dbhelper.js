@@ -1,16 +1,29 @@
 function createTable(db) {
     console.log("tablecreatestart")
-    db.schema.hasTable('users').then(function (exists) {
+    db.schema.hasTable('posts').then(function (exists) {
         if (!exists) {
-            return db.schema.createTable('users', function (t) {
+            return db.schema.createTable('posts', function (t) {
                 t.increments('id').primary();
-                t.string('first_name', 100);
-                t.string('last_name', 100);
-                t.text('bio');
+                t.integer('userid', 100);
+                t.string('mood', 100);
+                t.string('weather', 100);
             });
         }
     });
 }
+
+function idValidation(req, res, next) {
+    if(!isNaN(req.params.id)) return next();
+    next(new Error('Invalid ID'));
+}
+
+function getData(db) {
+   return db('posts');
+}
+
+function getPost(db, id) {
+    return db('posts').where('id', id).first();
+}
 module.exports = {
-    createTable
+    createTable, getData, idValidation, getPost
 }
