@@ -46,5 +46,8 @@ describe('Tests for POST functionalities', () => {
 });
 
 describe('Tests for UPDATE functionalities', () => {
-
+    it('POST /table/postid updates and returns a specific post', () => {
+        return request(app)
+            .post('/table/1')
+    })
 });
