@@ -38,7 +38,11 @@ describe('Tests for GET functionalities', () => {
 });
 
 describe('Tests for DELETE functionalities', () => {
-
+    it('DELETE /table/postid removes given postId object', () => {
+        return request(app)
+            .delete('/table/1')
+            .expect(200)
+    })
 });
 
 describe('Tests for POST functionalities', () => {
@@ -46,5 +50,11 @@ describe('Tests for POST functionalities', () => {
 });
 
 describe('Tests for UPDATE functionalities', () => {
-
+    it('PUT /table/postid updates given postId object', () => {
+    var postEdit = {id: 1,userid: 1,mood: "bad",weather: "rainy"}
+    return request(app)
+        .put('/table/1')
+        .send(postEdit)
+        .expect(200)
+    })
 });

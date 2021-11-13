@@ -17,6 +17,13 @@ function idValidation(req, res, next) {
     next(new Error('Invalid ID'));
 }
 
+function postValidation(post){
+    const hasUserID = !isNaN(post.userid);
+    const hasMood = typeof post.mood == 'string' && post.mood.trim() != '';
+    const hasWeather = typeof post.weather == 'string' && post.weather.trim() != '';
+    return hasUserID && hasMood && hasWeather;
+}
+
 function getData(db) {
    return db('posts');
 }
@@ -24,6 +31,24 @@ function getData(db) {
 function getPost(db, id) {
     return db('posts').where('id', id).first();
 }
+
+function updatePost(db, id, post) {
+    return db('posts').where('id', id)
+        .update({
+            mood: post.mood
+        })
+        .then(function(){
+            return db('posts');
+        })
+}
+
+function deletePost(db, id){
+    return db('posts').where('id', id)
+    .del()
+    .then(function(){
+        return db('posts');
+    })
+}
 module.exports = {
-    createTable, getData, idValidation, getPost
+    createTable, getData, idValidation, getPost, postValidation, updatePost, deletePost
 }
