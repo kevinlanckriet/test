@@ -35,6 +35,10 @@ describe('Tests for GET functionalities', () => {
                 }))
             });
     });
+
+    it('GET /posts/userid when invalid id return 404', () => {
+        return request(app).get('/posts/invalid').expect(404);
+    });
 });
 
 describe('Tests for DELETE functionalities', () => {
@@ -46,8 +50,5 @@ describe('Tests for POST functionalities', () => {
 });
 
 describe('Tests for UPDATE functionalities', () => {
-    it('POST /table/postid updates and returns a specific post', () => {
-        return request(app)
-            .post('/table/1')
-    })
+
 });
