@@ -21,3 +21,14 @@ services:
       POSTGRES_HOST: db
     volumes:
       - ./API/src:/usr/app/src
+  db_seeder:
+    image: andywer/plow
+    depends_on:
+      - postgres
+    env_file: ./.env
+    environment:
+      PGHOST: db
+    restart: "no"
+    volumes:
+      - ./API/migrations:/migrations
+      - ./API/seeds:/seeds
