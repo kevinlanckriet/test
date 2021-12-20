@@ -30,7 +30,7 @@ describe('Tests for GET functionalities', () => {
                 expect(response.body).toEqual(expect.objectContaining({
                     id: 1,
                     userid: 1,
-                    mood: "good",
+                    mood: "bad",
                     weather: "rainy"
                 }))
             });
@@ -40,7 +40,7 @@ describe('Tests for GET functionalities', () => {
 describe('Tests for DELETE functionalities', () => {
     it('DELETE /table/postid removes given postId object', () => {
         return request(app)
-            .delete('/table/1')
+            .delete('/table/3')
             .expect(200)
     })
 });
@@ -51,9 +51,9 @@ describe('Tests for POST functionalities', () => {
 
 describe('Tests for UPDATE functionalities', () => {
     it('PUT /table/postid updates given postId object', () => {
-    var postEdit = {id: 1,userid: 1,mood: "bad",weather: "rainy"}
+    var postEdit = {id: 2,userid: 1,mood: "angry"}
     return request(app)
-        .put('/table/1')
+        .put('/table/2')
         .send(postEdit)
         .expect(200)
     })

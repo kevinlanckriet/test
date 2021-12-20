@@ -8,6 +8,8 @@ services:
       POSTGRES_DB: pg-database
     ports:
       - '5432:5432'
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
   web: 
     build: ./api
     depends_on:
@@ -21,14 +23,3 @@ services:
       POSTGRES_HOST: db
     volumes:
       - ./API/src:/usr/app/src
-  db_seeder:
-    image: andywer/plow
-    depends_on:
-      - postgres
-    env_file: ./.env
-    environment:
-      PGHOST: db
-    restart: "no"
-    volumes:
-      - ./API/migrations:/migrations
-      - ./API/seeds:/seeds
