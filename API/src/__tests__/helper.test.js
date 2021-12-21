@@ -36,7 +36,7 @@ describe('Tests for GET functionalities', () => {
             });
     });
 });
-
+/*
 describe('Tests for DELETE functionalities', () => {
     it('DELETE /table/postid removes given postId object', () => {
         return request(app)
@@ -44,7 +44,7 @@ describe('Tests for DELETE functionalities', () => {
             .expect(200)
     })
 });
-
+*/
 describe('Tests for POST functionalities', () => {
 
 });

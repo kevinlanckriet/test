@@ -54,6 +54,15 @@ function getPost(db, id) {
     return db('posts').where('id', id).first();
 }
 /**
+ * Creates a post with given information
+ * @param db - the database that needs to be addressed
+ * @param post - the post (object) that needs to be created
+ * @returns the new post
+ */
+ function createPost(db, post) {
+    return db('posts').insert(post, '*');
+}
+/**
  * Updates the post of given id in the url
  * @param db - the database that needs to be addressed
  * @param id - the number extractied from the url
@@ -83,5 +92,5 @@ function deletePost(db, id){
     })
 }
 module.exports = {
-    createTable, getData, idValidation, getPost, postValidation, updatePost, deletePost
+    createTable, getData, idValidation, getPost, postValidation, updatePost, deletePost, createPost
 }
