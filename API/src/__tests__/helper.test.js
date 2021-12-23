@@ -46,14 +46,30 @@ describe('Tests for DELETE functionalities', () => {
 });
 */
 describe('Tests for POST functionalities', () => {
-
+    it('POST /createpost creates a specific post and returns it', async () => {
+        const data = {
+            userid: 1,
+            mood: "good",
+            weather: "codey"
+        }
+        await request(app)
+            .post("/createpost")
+            .send(data)
+            .expect(200)
+            .then(async (response) => {
+                // Check the response
+                expect(response.body.userid).toBe(data.userid)
+                expect(response.body.mood).toBe(data.mood)
+                expect(response.body.weather).toBe(data.weather)
+            })
+    })
 });
 
 describe('Tests for UPDATE functionalities', () => {
     it('PUT /table/postid updates given postId object', () => {
-    var postEdit = {id: 1,userid: 1,mood: "bad",weather: "rainy"}
+    var postEdit = {id: 2,userid: 1,mood: "dreamy",weather: "rainy"}
     return request(app)
-        .put('/table/1')
+        .put('/table/2')
         .send(postEdit)
         .expect(200)
     })

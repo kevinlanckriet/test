@@ -4,7 +4,7 @@ const port = 3000
 const bodyParser = require('body-parser')
 //accolades voor enkel direct aanspreken functie
 const {
-    createTable, getData, idValidation, getPost, postValidation, updatePost, deletePost, createPost
+    createTable, getData, idValidation, getPost, updatePost, deletePost, createPost
 } = require('./helpers/dbhelper.js')
 
 // middleware
@@ -23,12 +23,13 @@ const pg = require('knex')({
 
 createTable(pg);
 
+
+
 /**
  * [GET] Test endpoint
  * @returns (string) "hello world" if server is active
  */
 app.get('/', (req, res) => {
-    
     res.send('Hello World!')
 })
 /**
@@ -53,15 +54,12 @@ app.get('/table/:id', idValidation, (req, res) => {
  * [CREATE] /table/postid endpoint
  * @returns (JSON) of 1 post if server is active
  */
- app.post('/createpost', jsonParser, (req, res, next) => {
-    if(postValidation(req.body)){
-        createPost(pg, req.body).then(post => {
-            res.json(post[0]);
-        })
-    } else {
-        next(new Error('Invalid sticker'));
-    }
+ app.post('/createpost', jsonParser, (req, res) => {
+    createPost(pg, req.body).then(post => {
+        res.json(post[0]);
+    })
 })
+
 /**
  * [UPDATE] /table/postid endpoint
  * @returns (JSON) of 1 post if server is active
